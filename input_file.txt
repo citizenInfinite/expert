@@ -1,0 +1,11 @@
+#Jafta
+#test
+
+A => B
+B + A => D
+C | B => K
+Z => A
+
+=
+
+?DAK
