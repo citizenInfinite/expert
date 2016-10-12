@@ -1,27 +1,46 @@
 <?php 
 
-class ReadFile 
-{
-   public $_fileName;
+class  Engine {
+ 	private $_fileName;
+	private $_facts;
+	private $_query;
+	private $_symbols;
 
     function __construct($f_name)
     {
         $this->_fileName = $f_name;
+		$this->_facts = array();
+		$this->_symbols = array();
+		$this->_facts = array();
     }
-    public function read_file() {
+	public function runEngine() {
+		$this->_readFile();
+	}
+    private function _readFile() {
         $name = (string)$this->_fileName;
         $fd = fopen($name, 'r');
+        $all_arr = array();
         if (!$fd){
             echo "ERROR";
             return false;
         }
-        $all_arr = array();
         while($f_arr = fgets($fd)){
             array_push($all_arr, $f_arr);
         }
-        return $all_arr;
+        $this->_separateInput($all_arr);
     }
-    public function _SeparateInput($s_arr) {
+	private function _findSymbols($symStr) {
+		$cnt = 0;
+		foreach($symStr as $syms) {
+			if (isAlpha($syms)) {
+				$this->_symbols[$cnt++] = $syms;
+			}
+		}
+	}
+	private function _findAtecedent($rules) {
+		$tmp = explode();
+	}
+    private function _separateInput($s_arr) {
         $comment = array();
         $rule = array();
         $fact = array();
@@ -47,6 +66,7 @@ class ReadFile
 					}
             }
         }
+		$this->_findSymbols(implode(";", $rule));
 		echo "rules\n";
 		print_r($rule);
 		echo "=======\n\nfacts\n";
@@ -54,6 +74,7 @@ class ReadFile
 		echo "=======\nqueries\n";
 		print_r($queries);
     }
+	
 }
 
 ?>
